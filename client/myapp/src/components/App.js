@@ -12,7 +12,7 @@ import {Grid ,Grow} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import Form from "../components/Form/Form";
 import RecipeReviewCard from "./RecipeReviewCard";
-
+import {CircularProgress} from "@material-ui/core";
 
 function App() {
  
@@ -28,7 +28,7 @@ useEffect(() => {
 function createPot(post){
   return (
     <Grid item xs={12} sm={6}>
-   <RecipeReviewCard creator={post.creator} title={post.title} message={post.message} selectedFile={post.selectedFile} tags={post.tags}/>
+   <RecipeReviewCard likeCount={post.likeCount} id={post._id} creator={post.creator} title={post.title} message={post.message} selectedFile={post.selectedFile} tags={post.tags}/>
     </Grid>);
 }
   return (
@@ -41,7 +41,7 @@ function createPot(post){
     <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
         <Grid xs={12} sm={7}>
         <Grid className={classes.container} container alignItems="stretch" spacing={3}>
-        {posts.map(createPot)}
+        {posts.length==0?<CircularProgress />:posts.map(createPot)}
         </Grid>
         </Grid>
     <Grid xs={12} sm={4} >

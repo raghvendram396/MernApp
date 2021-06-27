@@ -14,28 +14,27 @@ export const createPost=(post) =>{
  }
 }
 
+export const deletePost=(id) => {
+    return {
+      type: DELETE_POST,
+      payload: id
+    }
+}
+export const likePost=(post)=>{
+  return {type: LIKE_POST,
+  payload: post
+}}
 export const asyncfetchPost=() => {
     return function(dispatch) {
       api.fetchPosts()
         .then(response => {
            const post=response.data.map((data) => data);
-        //    console.log("Here");
-        //    console.log(post.length);
-        //    console.log(post);
+      
           dispatch(getPost(post));
         })
         .catch(error => console.log(error));
     }
 }
-// export const asynccreatePost=(post)=> async (dispatch) => {
-//   console.log("Yha pe")
-//   console.log(post);
-//   try{
-//     const {data}=await api.createPost(post);
-//     dispatch({type:CREATE_POST, payload: data});
-//   }
-//   catch(error){console.log(error.message);}
-// }
 export const asynccreatePost=(post) => {
   return function(dispatch) {
     console.log("Yes post ");
@@ -49,5 +48,29 @@ export const asynccreatePost=(post) => {
         dispatch(createPost(data));
       })
       .catch(error => {console.log(error)});
+  }
+}
+
+export const asyncdeletePost=(id) => {
+
+return function (dispatch) {
+  console.log("Action id");
+  console.log(id);
+  api.deletePost(id)
+   .then(response => {
+     console.log(response.data);
+     dispatch(deletePost(id))
+   })
+   .catch(error => {console.log(error)});
+   
+}
+}
+export const asyncLikePost=(id)=> {
+  return function(dispatch) {
+    api.likePost(id)
+    .then(response => {
+    const {data}=response.data; 
+    dispatch(likePost(data))})
+    .catch(err=> {console.log(err)});
   }
 }
