@@ -8,7 +8,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
+import {Grid ,Grow} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
+import Form from "../components/Form/Form";
+import RecipeReviewCard from "./RecipeReviewCard";
+
 
 function App() {
  
@@ -17,27 +21,39 @@ const dispatch=useDispatch();
 useEffect(() => {
   dispatch(asyncfetchPost());
 },[dispatch]);
-const posts=useSelector(state => state);
+ const posts=useSelector(state => state);
   console.log("Ye app");
   console.log(posts);
 
-function createPost(post){
+function createPot(post){
   return (
-  <div>
-    <h1>{post.title}</h1>
-    <h2>{post.message}</h2>
-    </div>
-    );
+    <Grid item xs={12} sm={6}>
+   <RecipeReviewCard creator={post.creator} title={post.title} message={post.message} selectedFile={post.selectedFile} tags={post.tags}/>
+    </Grid>);
 }
   return (
     <Container maxwidth="lg">
     <AppBar className={classes.appbar} position="static">
     <Typography variant="h2" align="center" color="primary">Memories</Typography>
-    </AppBar>
-    
-    {posts.map(createPost)}
+    </AppBar>\
+    <Grow in>
+    <Container>
+    <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
+        <Grid xs={12} sm={7}>
+        <Grid className={classes.container} container alignItems="stretch" spacing={3}>
+        {posts.map(createPot)}
+        </Grid>
+        </Grid>
+    <Grid xs={12} sm={4} >
+           <Form className={classes.formWala}/>           
+           </Grid>
+           </Grid>
+    </Container>
+    </Grow>
     </Container> 
-  );
+ 
+    );
+
 }
 
 export default App;

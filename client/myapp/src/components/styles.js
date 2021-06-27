@@ -6,7 +6,11 @@ appbar: {
     borderRadius: 15,
     backgroundColor: "white",
     margin: "30px 0 30px 0",
-    jsutifyContent: "center"
+    justifyContent: "center"
 }
-
+,
+mainContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 }))
