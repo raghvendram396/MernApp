@@ -47,7 +47,6 @@ export const deletePost=(req,res) => {
 
 export const likePost=(req,res) => {
    const {id:_id}=req.params;
-   console.log(_id);
    let post;
    PostMessage.findOne({_id:_id},function(err,res){
   if(err){console.log(err)}
