@@ -33,9 +33,9 @@ function createPot(post){
 }
   return (
     <Container maxwidth="lg">
-    <AppBar className={classes.appbar} position="static">
+    <AppBar className={classes.appbar} position="static" style={{backgroundColor:"white"}}>
     <Typography variant="h2" align="center" color="primary">Memories</Typography>
-    </AppBar>\
+    </AppBar>
     <Grow in>
     <Container>
     <Grid className={classes.mainContainer} container justify="space-between" alignItems="stretch" spacing={3}>
